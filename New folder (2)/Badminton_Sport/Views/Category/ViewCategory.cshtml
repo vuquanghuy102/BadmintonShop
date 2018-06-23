@@ -1,0 +1,7 @@
+﻿@using Badminton_Sport.Models.Data;
+@model List<CATEGORY>
+
+@foreach (var item in Model)
+{
+    <li><a href="@Url.Action("ProductByCategory", new {@categoryid=item.CATEGORY_ID})">@item.CATEGORY_NAME</a></li>
+}

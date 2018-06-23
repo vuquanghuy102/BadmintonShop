@@ -1,0 +1,7 @@
+﻿@using Badminton_Sport.Models.Data;
+@model List<PRODUCE>
+
+@foreach (var item in Model)
+{
+    <li><a href="@Url.Action("ProductByProduce", new {@produceid=item.PRODUCE_ID})">@item.PRODUCE_NAME</a></li>
+}
