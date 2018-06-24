@@ -18,14 +18,14 @@ namespace Badminton_Sport.Controllers
 
         public ViewResult ProductByCategory(string categoryid = "")
         {
-            CATEGORY ct = db.CATEGORies.SingleOrDefault(n => n.CATEGORY_ID == categoryid);
+            var ct = db.CATEGORies.SqlQuery("Select * from CATEGORY where CATEGORY_ID = '"+categoryid+"'").ToList();
             if (ct == null)
             {
                 Response.StatusCode = 404;
                 return null;
                 //return RedirectToAction("Index", "Product");
             }
-            List<PRODUCT> listProduct = db.PRODUCTs.Where(n => n.CATEGORY_ID == categoryid).OrderBy(n => n.PRICE).ToList();
+            List<PRODUCT> listProduct = db.PRODUCTs.SqlQuery("Select * from PRODUCT where CATEGORY_ID = '"+categoryid+"'").ToList();
             if (listProduct.Count == 0)
             {
                 ViewBag.PRODUCT = "Không có sản phẩm nào";

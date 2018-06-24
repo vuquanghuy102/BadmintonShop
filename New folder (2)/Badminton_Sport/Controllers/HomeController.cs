@@ -1,4 +1,5 @@
 ﻿
+using Badminton_Sport.Models;
 using Badminton_Sport.Models.BusinessModels;
 using Badminton_Sport.Models.Data;
 using System;
@@ -12,6 +13,7 @@ namespace Badminton_Sport.Controllers
     public class HomeController : Controller
     {
         WebContext db = new WebContext();
+        private const string CartSession = "CartSession";
         public ActionResult Index()
         {
             return View();
@@ -56,6 +58,17 @@ namespace Badminton_Sport.Controllers
         public ActionResult Manual()
         {
             return View();
+        }
+        [ChildActionOnly]
+        public PartialViewResult HeaderCart()
+        {
+            var cart = Session[CartSession];
+            var list = new List<CartItem>();
+            if (cart != null)
+            {
+                list = (List<CartItem>)cart;
+            }
+            return PartialView(list);
         }
     }
 }
