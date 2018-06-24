@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace Badminton_Sport.Controllers
 {
@@ -11,9 +12,11 @@ namespace Badminton_Sport.Controllers
     {
         WebContext db = new WebContext();
         // GET: Product
-        public PartialViewResult Index()
+        public ActionResult Index(int? Page_No)
         {
-            var listProduct = db.PRODUCTs.ToList();
+            int pageSize = 8;
+            int pageNumber = (Page_No ?? 1);
+            var listProduct = db.PRODUCTs.ToList().ToPagedList(pageNumber, pageSize);
             return PartialView(listProduct);
         }
         public ActionResult Show(string productid="")
@@ -34,9 +37,11 @@ namespace Badminton_Sport.Controllers
                 status = true
             },JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Search(string keyword)
+        public ActionResult Search(string keyword, int? Page_No)
         {
-            List<PRODUCT> listProduct = db.PRODUCTs.SqlQuery("Select * from PRODUCT where PRODUCT_NAME like '%"+ keyword + "%'").ToList();
+            int pageSize = 8;
+            int pageNumber = (Page_No ?? 1);
+            PagedList.IPagedList<PRODUCT> listProduct = db.PRODUCTs.SqlQuery("Select * from PRODUCT where PRODUCT_NAME like '%"+ keyword + "%'").ToList().ToPagedList(pageNumber, pageSize);
             ViewBag.KeyWord = keyword;
             if(keyword=="")
             {

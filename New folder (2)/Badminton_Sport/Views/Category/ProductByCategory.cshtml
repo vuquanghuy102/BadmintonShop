@@ -1,5 +1,6 @@
 ﻿@using Badminton_Sport.Models.Data;
-@model List<PRODUCT>
+@using PagedList.Mvc;
+@model PagedList.IPagedList<PRODUCT>
 @{
     ViewBag.Title = "ProductByCategory";
 }
@@ -20,27 +21,33 @@
             {
                 <h1>@ViewBag.PRODUCE</h1>
             }
-            @foreach (var item in Model)
-            {
-            <div class="grid1_of_4 simpleCart_shelfItem">
-                <div class="content_box">
-                    <a href="@Url.Action("Show", new { @productid=item.PRODUCT_ID })">
-                        <div class="view view-fifth">
-                            <img src="@Url.Content("~/Content/Layout/images/" + item.IMAGES)" class="img-responsive" alt="" />
+            <div class="row1" style="height: auto">
+                @foreach (var item in Model)
+                {
+                    <div class="grid1_of_4 simpleCart_shelfItem">
+                        <div class="content_box">
+                            <a href="@Url.Action("Show", new { @productid=item.PRODUCT_ID })">
+                                <div class="view view-fifth">
+                                    <img src="@Url.Content("~/Content/Layout/images/" + item.IMAGES)" class="img-responsive" alt="" />
+                                </div>
+                            </a>
+                            <h5><a href="@Url.Action("Show", new { @productid=item.PRODUCT_ID })">@item.PRODUCT_NAME</a></h5>
+                            <div class="size_1">
+                                <span class="item_price">@item.PRICE</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="size_2">
+                                <div class="size_2-right"><a href="/AddItem?productID=@item.PRODUCT_ID&quantity=1" class="item_add item_add1 btn_5" value="">Add</a></div>
+                                <div class="clearfix"> </div>
+                            </div>
                         </div>
-                    </a>
-                    <h5><a href="@Url.Action("Show", new { @productid=item.PRODUCT_ID })">@item.PRODUCT_NAME</a></h5>
-                    <div class="size_1">
-                        <span class="item_price">@item.PRICE</span>
-                        <div class="clearfix"></div>
                     </div>
-                    <div class="size_2">
-                        <div class="size_2-right"><a href="/AddItem?productID=@item.PRODUCT_ID&quantity=1" class="item_add item_add1 btn_5" value="">Add</a></div>
-                        <div class="clearfix"> </div>
-                    </div>
-                </div>
+                }
             </div>
-            }
+            <div class="row_2">
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                @Html.PagedListPager(Model, Page_No => Url.Action("Index", new { Page_No }))
+            </div>
         </div>
         <!-- end grids_of_4 -->
     </div>

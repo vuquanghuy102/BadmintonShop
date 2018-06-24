@@ -1,4 +1,5 @@
 ﻿using Badminton_Sport.Models.Data;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,10 @@ namespace Badminton_Sport.Controllers
             return View(db.CATEGORies.ToList());
         }
 
-        public ViewResult ProductByCategory(string categoryid = "")
+        public ViewResult ProductByCategory(string categoryid, int? Page_No)
         {
+            int pageSize = 8;
+            int pageNumber = (Page_No ?? 1);
             var ct = db.CATEGORies.SqlQuery("Select * from CATEGORY where CATEGORY_ID = '"+categoryid+"'").ToList();
             if (ct == null)
             {
@@ -25,7 +28,7 @@ namespace Badminton_Sport.Controllers
                 return null;
                 //return RedirectToAction("Index", "Product");
             }
-            List<PRODUCT> listProduct = db.PRODUCTs.SqlQuery("Select * from PRODUCT where CATEGORY_ID = '"+categoryid+"'").ToList();
+            PagedList.IPagedList<PRODUCT> listProduct = db.PRODUCTs.SqlQuery("Select * from PRODUCT where CATEGORY_ID = '"+categoryid+"'").ToList().ToPagedList(pageNumber, pageSize);
             if (listProduct.Count == 0)
             {
                 ViewBag.PRODUCT = "Không có sản phẩm nào";
