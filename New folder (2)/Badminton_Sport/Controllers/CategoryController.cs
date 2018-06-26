@@ -19,7 +19,7 @@ namespace Badminton_Sport.Controllers
 
         public ViewResult ProductByCategory(string categoryid, int? Page_No)
         {
-            int pageSize = 8;
+            int pageSize = 3;
             int pageNumber = (Page_No ?? 1);
             var ct = db.CATEGORies.SqlQuery("Select * from CATEGORY where CATEGORY_ID = '"+categoryid+"'").ToList();
             if (ct == null)

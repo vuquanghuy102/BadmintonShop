@@ -23,7 +23,7 @@
                         <div class="content_box">
                             <a href="@Url.Action("Show", new { @productid=item.PRODUCT_ID })">
                                 <div class="view view-fifth">
-                                    <img src="@Url.Content("~/Content/Layout/images/" + item.IMAGES)" class="img-responsive" alt="" />
+                                    <img src="@Url.Content("~/Content/Layout/images/" + item.IMAGES)" class="img-responsive" alt="" style="width: 170px; height: 215px;"/>
                                 </div>
                             </a>
                             <h5><a href="@Url.Action("Show", new { @productid=item.PRODUCT_ID })">@item.PRODUCT_NAME</a></h5>

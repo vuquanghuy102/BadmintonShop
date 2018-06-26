@@ -20,6 +20,12 @@ namespace Badminton_Sport
                 namespaces: new string[] { "Badminton_Sport.Controllers" }
             );
             routes.MapRoute(
+                name: "Payment",
+                url: "Payment",
+                defaults: new { controller = "Cart", action = "Payment", id = UrlParameter.Optional },
+                namespaces: new string[] { "Badminton_Sport.Controllers" }
+            );
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },

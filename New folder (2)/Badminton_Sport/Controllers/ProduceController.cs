@@ -18,7 +18,7 @@ namespace Badminton_Sport.Controllers
         }
         public ActionResult ProductByProduce(string produceid, int? Page_No)
         {
-            int pageSize = 8;
+            int pageSize = 3;
             int pageNumber = (Page_No ?? 1);
             var pd = db.PRODUCEs.SqlQuery("Select * from PRODUCE where PRODUCE_ID = '"+produceid+"'").ToList();
             if (pd == null)

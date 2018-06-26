@@ -28,8 +28,6 @@ namespace Badminton_Sport.Models.Data
         [StringLength(10)]
         public string APPROVAL_ADMIN { get; set; }
 
-        public double TOTAL { get; set; }
-
         public bool STT { get; set; }
 
         public virtual USER USER { get; set; }

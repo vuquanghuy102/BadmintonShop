@@ -3059,3 +3059,7 @@ li.middle {
     width: 23.22222%;
     /*margin-left: 2.33333%;*/
 }
+.img-responsive {
+    width: 170px ;
+    height: 215px ;
+}

@@ -14,7 +14,7 @@ namespace Badminton_Sport.Controllers
         // GET: Product
         public ActionResult Index(int? Page_No)
         {
-            int pageSize = 8;
+            int pageSize = 3;
             int pageNumber = (Page_No ?? 1);
             var listProduct = db.PRODUCTs.ToList().ToPagedList(pageNumber, pageSize);
             return PartialView(listProduct);
@@ -26,6 +26,8 @@ namespace Badminton_Sport.Controllers
             {
                 return RedirectToAction("Index", "Product");
             }
+            int Price = Convert.ToInt32(product.PRICE) * 1000;
+            product.PRICE = Price;
             return View(product);
         }
         public JsonResult ListName(string q)

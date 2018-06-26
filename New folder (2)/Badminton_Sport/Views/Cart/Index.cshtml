@@ -1,0 +1,69 @@
+﻿@model List<Badminton_Sport.Models.CartItem>
+@{
+    ViewBag.Title = "Index";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+    <script src="/Content/Layout/js/controller/cartController.js"></script>
+}
+<div class="container">
+    <div class="check">
+        <div class="col-md-9 cart-items">
+            <h1>My Shopping Bag (@Model.Count)</h1>
+            @if (Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <div class="cart-header">
+                        <a href="#" data-id="@item.Product.PRODUCT_ID" class="btn-delete close1"></a>
+                        <div class="cart-sec simpleCart_shelfItem">
+                            <div class="cart-item cyc">
+                                <img src="@Url.Content("~/Content/Layout/images/" + item.Product.IMAGES)" class="img-responsive" alt=""  />
+                            </div>
+                            <div class="cart-item-info">
+                                <h3><a href="#">@item.Product.PRODUCT_NAME</a></h3>
+                                <ul class="qty">
+                                    <input type="number" class="txtQuantity" data-id="@item.Product.PRODUCT_ID" value="@item.Quantity"></input>
+                                </ul>
+                                <div class="delivery">
+                                    <p>Price: @item.Product.PRICE</p>
+                                    <span>Total: @(item.Product.PRICE * item.Quantity)</span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                }
+            <button id="btnContinue" class="btn">Tiếp tục mua hàng</button>
+            <button id="btnUpdate" class="btn">Cập nhật giỏ hàng</button>
+            <button id="btnDeleteAll" class="btn">Xoá giỏ hàng</button>
+            <button id="btnPayment" class="btn"><a href="/Cart/Payment">Thanh Toán</a></button>
+            }
+            else
+            {
+                <span class="alert alert-danger">Chưa có sản phẩm nào trong giỏ hàng</span>
+            }
+
+        </div>
+        <div class="col-md-3 cart-total">
+            <a class="continue" href="#">Continue to basket</a>
+            <div class="price-details">
+                <h3>Price Details</h3>
+                <span>Total</span>
+                <span class="total1">@ViewBag.TotalMoney</span>
+                <span>Discount</span>
+                <span class="total1">---</span>
+                <div class="clearfix"></div>
+            </div>
+            <ul class="total_price">
+                <li class="last_price"> <h4>TOTAL</h4></li>
+                <li class="last_price"><span>@ViewBag.TotalMoney</span></li>
+                <div class="clearfix"> </div>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

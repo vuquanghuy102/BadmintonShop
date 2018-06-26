@@ -20,6 +20,8 @@ namespace Badminton_Sport.Models.Data
 
         public int QUANTITY { get; set; }
 
+        public double TOTAL { get; set; }
+
         public virtual BILL BILL { get; set; }
 
         public virtual PRODUCT PRODUCT { get; set; }
